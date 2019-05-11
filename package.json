@@ -1,0 +1,36 @@
+{
+  "name": "react-sandbox",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "author": "Maksim Sakharov <maxim@junehomes.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node fuse"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.11",
+    "debug": "^4.1.1",
+    "emotion": "^10.0.9",
+    "emotion-server": "^10.0.9",
+    "fuse-box": "^4.0.0-next.7",
+    "isomorphic-fetch": "^2.2.1",
+    "koa": "^2.7.0",
+    "koa-static": "^5.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "tslint": "^5.16.0"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.4",
+    "@types/isomorphic-fetch": "^0.0.35",
+    "@types/koa": "^2.0.48",
+    "@types/koa-static": "^4.0.1",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.8.17",
+    "@types/react-dom": "^16.8.4",
+    "terser": "^3.17.0",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  }
+}
