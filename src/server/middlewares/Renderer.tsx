@@ -3,7 +3,10 @@ import { renderStylesToNodeStream } from 'emotion-server'
 import { renderToNodeStream } from 'react-dom/server'
 import React from 'react'
 
+import { awaitPromises } from '../../common/store/GlobalState'
+
 import { IServerPageProps } from '../ServerPage'
+import { promises } from 'fs';
 
 const SUCCESS_STATUS = 200
 
@@ -15,9 +18,14 @@ interface IRendererProps {
 
 export default ({ ServerPageComponent, AppComponent, clientBundleName }: IRendererProps) =>
   async (ctx: ParameterizedContext) => {
-    let renderPage = <ServerPageComponent bundle={clientBundleName} body={<AppComponent />} />
+    let render = () =>
+      <ServerPageComponent bundle={clientBundleName} body={<AppComponent />} />
 
-    let stream = renderToNodeStream(renderPage)
+    render()
+    console.log({awaitPromises})
+    await Promise.all(awaitPromises)
+
+    let stream = renderToNodeStream(render())
       .pipe(renderStylesToNodeStream())
 
     await new Promise((resolve) => {

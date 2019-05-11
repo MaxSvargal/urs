@@ -21,7 +21,7 @@ fuse.dev({ httpServer: false, hmr: true })
 
 let clientBundle = fuse
   .bundle('client/app')
-  .watch('client/**')
+  .watch('common/**')
   .hmr()
   .instructions(' > client/index.ts')
 
