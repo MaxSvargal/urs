@@ -1,18 +1,20 @@
+import { connectRouter } from 'connected-react-router'
+import { History } from 'history'
 import { combineReducers } from 'redux'
-import { createReducer, ActionType, StateType } from 'typesafe-actions'
+import { createReducer } from 'typesafe-actions'
 
 import * as actions from '../actions'
 
-export type TRootAction = ActionType<typeof actions>
+export default (history: History) => {
+  const dataReducer = createReducer([ 'WAT' ])
+    .handleAction(actions.fetchSomeDataAsync.success, (state, action) =>
+      [ ...state, ...action.payload.map(n => n.toString()) ])
 
-export const dataReducer = createReducer<string[], TRootAction>([])
-  .handleAction(actions.fetchSomeDataAsync.success, (state, action) =>
-  [ ...state, ...action.payload.map(n => n.toString()) ])
+    .handleAction(actions.requestFetchSomeData, (state, action) =>
+      [ action.payload.id ])
 
-const rootReducer = combineReducers({
-  data: dataReducer,
-})
-
-export type TState = StateType<typeof rootReducer>
-
-export default rootReducer
+  return combineReducers({
+    data: dataReducer,
+    router: connectRouter(history),
+  })
+}

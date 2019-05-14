@@ -1,10 +1,11 @@
 import debug from 'debug'
 import { default as Koa } from 'koa'
+import { default as compress } from 'koa-compress'
 import serve from 'koa-static'
 
-import App from '../client/App'
-import ServerPage from './ServerPage'
-import renderer from './middlewares/Renderer'
+import cache from './middlewares/cache'
+import renderer from './middlewares/renderer'
+import timer from './middlewares/timer'
 
 const app = new Koa()
 const log = debug('server::app')
@@ -15,12 +16,11 @@ const [ , , clientBundleName ] = process.argv
 log('Frontend server starting...')
 
 app.use(serve('./dist/client'))
-
-app.use(renderer({
-  AppComponent: App,
-  clientBundleName,
-  ServerPageComponent: ServerPage,
-}))
+// app.use(errorHandler('Internal_Server_Error'))
+app.use(timer)
+app.use(compress({ threshold: 2048 }))
+app.use(cache)
+app.use(renderer({ clientBundleName }))
 
 log(`Frontend server is listening on port ${PORT}`)
 app.listen(PORT)

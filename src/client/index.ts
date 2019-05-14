@@ -1,5 +1,5 @@
 import { hydrate } from 'react-dom'
-import App from './App'
+import App from '../common/App'
 
 hydrate(App(), document.querySelector('#root'))
 

@@ -1,5 +1,5 @@
 import debug from 'debug'
-import { FuseBox, RawPlugin } from 'fuse-box'
+import { FuseBox, RawPlugin, EnvPlugin } from 'fuse-box'
 
 process.env.DEBUG = 'server:*'
 
@@ -9,7 +9,11 @@ const fuse = FuseBox.init({
   cache: true,
   homeDir: 'src',
   output: 'dist/$name-$hash.js',
-  plugins: [RawPlugin(['.woff2'])],
+  // plugins: [
+  //   EnvPlugin({
+  //     NODE_ENV: 'development',
+  //   }),
+  // ],
   sourceMaps: {
     project: true,
     vendor: false,
@@ -21,13 +25,15 @@ fuse.dev({ httpServer: false, hmr: true })
 
 let clientBundle = fuse
   .bundle('client/app')
+  .plugin(EnvPlugin({ BROWSER: true }))
   .watch('common/**')
   .hmr()
   .instructions(' > client/index.ts')
 
 fuse
   .bundle('server/bundle')
-  .watch('server/**')
+  // .plugin(EnvPlugin({ BROWSER: false }))
+  .watch('**')
   .instructions(' > [server/index.ts]')
   .target('server@esnext')
   .completed((proc) =>

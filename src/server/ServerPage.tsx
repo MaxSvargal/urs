@@ -1,11 +1,13 @@
-import * as React from 'react'
+import React from 'react'
+import { default as serialize } from 'serialize-javascript'
 
 export interface IServerPageProps {
   body: JSX.Element
   bundle: string
+  state: object
 }
 
-export default ({ bundle, body }: IServerPageProps) => (
+export default ({ bundle, body, state }: IServerPageProps) => (
   <html lang="en">
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" />
@@ -16,6 +18,7 @@ export default ({ bundle, body }: IServerPageProps) => (
     </head>
     <body>
       <div id="root">{ body }</div>
+      {<script dangerouslySetInnerHTML={{__html: `window.__initialState=${serialize(state || {})};`}} charSet="UTF-8"/>}
       <script src={ bundle } />
     </body>
   </html>

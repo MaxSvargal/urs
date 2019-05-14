@@ -1,7 +1,8 @@
-import { action, createAsyncAction } from 'typesafe-actions'
+import { createAction, createAsyncAction } from 'typesafe-actions'
 
-export const requestFetchSomeData = ({ id }: { id: string }) =>
-  action('fetchSomeData', { id }, { async: true })
+export { routerActions } from 'connected-react-router'
+
+export const requestFetchSomeData = createAction('fetchSomeData', action => (id: string) => action({ id }))
 
 export const fetchSomeDataAsync = createAsyncAction(
   'fetchSomeDataRequest',
