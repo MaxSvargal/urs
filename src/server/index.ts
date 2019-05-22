@@ -9,9 +9,9 @@ import timer from './middlewares/timer'
 
 const app = new Koa()
 const log = debug('server::app')
-const DEFAULT_PORT = 4396
-const PORT = parseInt(process.env.PORT, 10) || DEFAULT_PORT
-const [ , , clientBundleName ] = process.argv
+const [ , , clientBundleName, port ] = process.argv
+const DEFAULT_PORT = 80
+const PORT = parseInt(port, 10) || DEFAULT_PORT
 
 log('Frontend server starting...')
 

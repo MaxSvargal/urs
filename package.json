@@ -5,15 +5,18 @@
   "author": "Maksim Sakharov <maxim@junehomes.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node fuse"
+    "start": "DEBUG=server::* PORT=9000 ts-node fuse"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.11",
+    "@rebass/emotion": "^3.1.0",
+    "@rebass/grid": "^6.0.0",
     "@types/history": "^4.7.2",
     "@types/koa-compress": "^2.0.9",
     "@types/react-redux": "^7.0.8",
     "@types/react-router": "^5.0.0",
+    "@types/rebass__grid": "^6.0.5",
     "@types/redux-saga": "^0.10.5",
     "@types/serialize-javascript": "^1.5.0",
     "connected-react-router": "^6.4.0",
@@ -30,6 +33,7 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router": "^5.0.0",
+    "rebass": "^3.1.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-loop": "^5.0.0",
@@ -46,6 +50,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
+    "@types/rebass": "^3.0.4",
     "prettier": "^1.17.1",
     "terser": "^3.17.0",
     "ts-node": "^8.1.0",

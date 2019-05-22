@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router'
+import debug from 'debug'
 import { renderStylesToNodeStream } from 'emotion-server'
 import { ParameterizedContext } from 'koa'
 import { createElement } from 'react'
@@ -7,7 +8,6 @@ import { renderToNodeStream, renderToStaticMarkup } from 'react-dom/server'
 import { sagaEnd } from '~/common/actions'
 import rootSaga from '~/common/sagas'
 import configureStore from '~/common/store/configureStore'
-import debug from 'debug'
 import ServerApp from '../ServerApp'
 import { HTTP_OK } from '../constants'
 
@@ -15,11 +15,8 @@ interface IRendererProps {
   clientBundleName: string
 }
 
-const log = debug('server::renderer')
-
 export default ({ clientBundleName }: IRendererProps) =>
   async (ctx: ParameterizedContext) => {
-    log('Start rendering...')
     let url = ctx.req.url || ''
     let context = {}
     let { store, runSaga } = configureStore({}, url)

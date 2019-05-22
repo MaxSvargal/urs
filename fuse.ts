@@ -1,13 +1,22 @@
 import debug from 'debug'
-import { FuseBox, RawPlugin, EnvPlugin } from 'fuse-box'
+import { EnvPlugin, FuseBox } from 'fuse-box'
 
-process.env.DEBUG = 'server:*'
+process.env.DEBUG = 'server::*'
+const log = debug('server::build')
+
+log('Building bundles...')
 
 const fuse = FuseBox.init({
   // hash: true,
   allowSyntheticDefaultImports: true,
+  autoImport: {
+    React: 'react',
+  },
   cache: true,
   homeDir: 'src',
+  log: {
+    enabled: false,
+  },
   output: 'dist/$name-$hash.js',
   // plugins: [
   //   EnvPlugin({
@@ -29,15 +38,17 @@ let clientBundle = fuse
   .watch('common/**')
   .hmr()
   .instructions(' > client/index.ts')
+  .completed(() => { log('Building client bundle complete') })
 
 fuse
   .bundle('server/bundle')
   // .plugin(EnvPlugin({ BROWSER: false }))
-  .watch('**')
+  .watch('server/**')
   .instructions(' > [server/index.ts]')
   .target('server@esnext')
-  .completed((proc) =>
-    proc.start([  clientBundle.context.output.lastGeneratedFileName ]))
+  .completed(proc =>
+    proc.start([ clientBundle.context.output.lastGeneratedFileName, process.env.PORT ]))
 
-fuse.run()
-  .catch((err) => { debug('server:fuse')(err) })
+fuse.run({ chokidar: { ignored: /(^|[\/\\])\../ } })
+  .then(() => { log('All bundles building complete. Ready to start the server...') })
+  .catch(err => { debug('server:fuse')(err) })
