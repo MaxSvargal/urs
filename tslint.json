@@ -2,7 +2,7 @@
   "extends": "tslint:all",
   "autoFixOnSave": true,
   "rules": {
-    "no-implicit-dependencies": [ true, [ "~" ] ],
+    "no-implicit-dependencies": [ true, [ "~", "components" ] ],
     "arrow-parens": [true, "ban-single-arg-parens"],
     "no-var-keyword": true,
     "no-unused-variable": [
@@ -47,6 +47,7 @@
     "max-line-length": [true, 160],
     "no-submodule-imports": false,
     "no-non-null-assertion": false,
+    "no-magic-numbers": [true, {"allowed-numbers": [1, 2, 3],"ignore-jsx": true}],
     "curly": false,
     "typedef-whitespace": [
       true,
