@@ -1,6 +1,6 @@
 import { createAction, createAsyncAction } from 'typesafe-actions'
-
 export { routerActions } from 'connected-react-router'
+import { END } from 'redux-saga'
 
 export const requestFetchSomeData = createAction('fetchSomeData', action => (id: string) => action({ id }))
 

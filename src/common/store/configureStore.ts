@@ -5,6 +5,8 @@ import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import createSagaMiddleware, { Saga } from 'redux-saga'
 
+import { install } from 'redux-loop'
+
 import makeReducer from '../reducers'
 
 import { RootStore } from '../types'
@@ -27,7 +29,7 @@ export default (initialState: object, url = '/') => {
   const store = createStore(
     rootReducer,
     initialState,
-    composeWithDevTools(enhancers),
+    composeWithDevTools(enhancers, install()),
   ) as RootStore
 
   let runSaga = (saga: Saga) =>

@@ -3,22 +3,23 @@ import { renderStylesToNodeStream } from 'emotion-server'
 import { ParameterizedContext } from 'koa'
 import { createElement } from 'react'
 import { renderToNodeStream, renderToStaticMarkup } from 'react-dom/server'
-import { END } from 'redux-saga'
 
-import rootSaga from '../../common/sagas'
-import configureStore from '../../common/store/configureStore'
-
-import { HTTP_OK } from '../constants'
-
+import { sagaEnd } from '~/common/actions'
+import rootSaga from '~/common/sagas'
+import configureStore from '~/common/store/configureStore'
+import debug from 'debug'
 import ServerApp from '../ServerApp'
-import { RootAction, RootState } from 'common/types';
+import { HTTP_OK } from '../constants'
 
 interface IRendererProps {
   clientBundleName: string
 }
 
+const log = debug('server::renderer')
+
 export default ({ clientBundleName }: IRendererProps) =>
   async (ctx: ParameterizedContext) => {
+    log('Start rendering...')
     let url = ctx.req.url || ''
     let context = {}
     let { store, runSaga } = configureStore({}, url)
@@ -34,8 +35,8 @@ export default ({ clientBundleName }: IRendererProps) =>
     let sagaTask = runSaga(rootSaga)
     store.dispatch(push({ pathname: url }))
 
-    renderToStaticMarkup(getPageElement())
-    store.dispatch({ type: END })
+    console.log(renderToStaticMarkup(getPageElement()))
+    store.dispatch(sagaEnd())
 
     await sagaTask.toPromise()
 
