@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { cachedStore } from '../store/configureStore'
 import { RootAction } from '../types'
 
@@ -8,7 +8,8 @@ let dispatchActionsArray = (actions: RootAction[]) => {
   actions.forEach(a => { cachedStore.dispatch(a) })
 }
 
-export default (actions: RootAction[], deps?: readonly unknown[]) => {
+/* tslint only-arrow-functions: 0 */
+export function usePrefetch(actions: RootAction[], deps?: readonly unknown[]) {
   if (!BROWSER) dispatchActionsArray(actions)
   useEffect(() => { dispatchActionsArray(actions) }, deps)
 }

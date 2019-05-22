@@ -1,9 +1,9 @@
 import React from 'react'
-import { requestFetchSomeData } from './actions'
-import usePrefetch from './hooks/usePrefetch'
 
-export default () => {
-  usePrefetch([ requestFetchSomeData('id') ], [])
+import Header from '~/common/components/Header'
 
-  return <div />
-}
+export default () =>
+  <>
+    <Header />
+    <h1>HI!</h1>
+  </>

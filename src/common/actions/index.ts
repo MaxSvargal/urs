@@ -10,3 +10,5 @@ export const fetchSomeDataAsync = createAsyncAction(
   'fetchSomeDataFailure',
   'fetchSomeDataCancel',
 )<void, number[], Error, string>()
+
+export const sagaEnd = createAction(END.type)

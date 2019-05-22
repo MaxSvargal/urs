@@ -35,7 +35,7 @@ export default ({ clientBundleName }: IRendererProps) =>
     let sagaTask = runSaga(rootSaga)
     store.dispatch(push({ pathname: url }))
 
-    console.log(renderToStaticMarkup(getPageElement()))
+    renderToStaticMarkup(getPageElement())
     store.dispatch(sagaEnd())
 
     await sagaTask.toPromise()

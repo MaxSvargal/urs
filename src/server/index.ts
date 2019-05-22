@@ -16,7 +16,7 @@ const [ , , clientBundleName ] = process.argv
 log('Frontend server starting...')
 
 app.use(serve('./dist/client'))
-app.use(errorHandler('Internal_Server_Error'))
+// app.use(errorHandler('Internal_Server_Error'))
 app.use(timer)
 app.use(compress({ threshold: 2048 }))
 app.use(cache)

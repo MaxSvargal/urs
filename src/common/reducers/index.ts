@@ -14,12 +14,12 @@ export default (history: History) => {
     .handleAction(actions.fetchSomeDataAsync.success, (state: TData, action) =>
       [ ...state, ...action.payload.map(n => n.toString()) ])
 
-    .handleAction(actions.requestFetchSomeData, (state: TData, _) =>
-      loop(state, Cmd.run(() => Promise.resolve([ 'foo' ]), {
-        args: [ '123' ],
-        failActionCreator: actions.fetchSomeDataAsync.failure,
-        successActionCreator: actions.fetchSomeDataAsync.success,
-      })))
+    // .handleAction(actions.requestFetchSomeData, (state: TData, _) =>
+    //   loop(state, Cmd.run(() => Promise.resolve([ 'foo' ]), {
+    //     args: [ '123' ],
+    //     failActionCreator: actions.fetchSomeDataAsync.failure,
+    //     successActionCreator: actions.fetchSomeDataAsync.success,
+    //   })))
 
   return combineReducers({
     data: dataReducer,
