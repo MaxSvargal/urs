@@ -1,5 +1,5 @@
 {
-  "extends": "tslint:all",
+  "extends": [ "tslint:all", "tslint-react", "tslint-config-prettier" ],
   "autoFixOnSave": true,
   "rules": {
     "no-implicit-dependencies": [ true, [ "~", "components" ] ],
@@ -22,7 +22,9 @@
       true,
       {
         "multiline": "always",
-        "singleline": "never"
+        "singleline": "never",
+        "functions": "never",
+        "typeLiterals": "ignore"
       }
     ],
     "class-name": true,
@@ -47,8 +49,9 @@
     "max-line-length": [true, 160],
     "no-submodule-imports": false,
     "no-non-null-assertion": false,
-    "no-magic-numbers": [true, {"allowed-numbers": [1, 2, 3],"ignore-jsx": true}],
+    "no-magic-numbers": [true, {"allowed-numbers": [0, 1, 2, 3],"ignore-jsx": true}],
     "curly": false,
+    "type-literal-delimiter": false,
     "typedef-whitespace": [
       true,
       {
@@ -69,7 +72,8 @@
       "check-type"
     ],
     "no-default-export": false,
-    "prefer-const": false
+    "prefer-const": false,
+    "no-object-literal-type-assertion": [true, {"allow-arguments": true}]
   },
   "jsRules": {
     "triple-equals": [true, "allow-null-check"]

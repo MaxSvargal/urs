@@ -43,7 +43,7 @@ let clientBundle = fuse
 fuse
   .bundle('server/bundle')
   // .plugin(EnvPlugin({ BROWSER: false }))
-  .watch('server/**')
+  .watch('**')
   .instructions(' > [server/index.ts]')
   .target('server@esnext')
   .completed(proc =>

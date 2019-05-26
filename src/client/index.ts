@@ -1,6 +1,7 @@
 import { hydrate } from 'react-dom'
-import App from '~/common/App'
 import configureStore from '~/common/store/configureStore'
 
-const store = configureStore(window.__initialState)
-hydrate(App(), document.querySelector('#root'))
+import { BrowserApp } from './BrowserApp'
+
+const { store, history } = configureStore(window.__initialState)
+hydrate(BrowserApp({ store, history }), document.querySelector('#root'))

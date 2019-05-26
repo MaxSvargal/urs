@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router'
 
-import App from '../common/App'
+import { App } from '../common/App'
 import ServerPage from './ServerPage'
 
 import { RootStore } from '../common/types'
