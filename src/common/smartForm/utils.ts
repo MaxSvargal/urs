@@ -19,21 +19,21 @@ import {
   reject,
   List,
   Morphism,
-  Predicate,
+  KeyValuePair,
+  NestedMorphism,
 } from 'ramda'
 
 /* toggleStringContainsInList */
-export let equalStrings = equals as Morphism<string, Morphism<boolean, boolean>>
-export let rejectString = reject as (fn: Predicate<boolean>) => Morphism<List<string>, string[]>
-export let rejectByStringsEqual = o(rejectString, equalStrings)
+export let rejectByStringsEqual = o<string, Morphism<string, boolean>, Morphism<string[], string[]>>(reject, equals)
 // TODO: converge does not work with ifElse. I don't know how to compose it =(
+// -> converge(ifElse, [ contains, rejectByStringsEqual, append ])
 export let toggleStringContainsInList = (key: string) => ifElse(contains(key), rejectByStringsEqual(key), append(key))
 
 /* getMinMaxValuesFromStateOfActions */
 export let reduceMin = reduce(min, Infinity)
 export let reduceMax = reduce(max, -Infinity)
-type GetMinMaxPair = (xs: number[]) => [number, number]
-export let getMinMaxPair: GetMinMaxPair = converge<number, number, [number, number]>(pair, [reduceMin, reduceMax])
+// type GetMinMaxPair = (xs: number[]) => [number, number]
+export let getMinMaxPair = converge<NestedMorphism<number[], number[], KeyValuePair<number, number>>>(pair, [reduceMin, reduceMax])
 
 export let propKey = prop('key')
 export let filterByKeyPropIncludesInList = (list: List<string>) => filter<IAction>(o(flip(contains)(list), propKey))
