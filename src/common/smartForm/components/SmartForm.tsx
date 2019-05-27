@@ -2,10 +2,10 @@ import { Button, Heading } from '@rebass/emotion'
 import { Box, Flex } from '@rebass/grid/emotion'
 import { Route } from 'react-router'
 
+import { stepsConfig, Steps } from '../config'
+import { useSteps, ISmartFormAction } from '../hooks/useSteps'
 import { MultipleFormStep } from './MultipleFormStep'
 import { SimpleFormStep } from './SimpleFormStep'
-import { stepsConfig, Steps } from './config'
-import { useSteps, ISmartFormAction } from './useSteps'
 
 export let SmartForm = () => {
   let { state, dispatch, getStepPath, next, clearStep } = useSteps()

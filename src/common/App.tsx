@@ -1,10 +1,16 @@
 import { Route, Switch } from 'react-router'
 
-import Header from 'components/Header'
-import { SmartForm } from 'components/smartForm/SmartForm'
+import { SmartForm } from '~/common/smartForm/components/SmartForm'
+import Header from './Header'
+import { ContentGrid, RootGrid } from './shared/components/layout/MainLayout'
 
-export const App = () =>
-  <Switch>
-    <Route exact path='/book/:step' component={SmartForm} />
-    <Route component={Header} />
-  </Switch>
+export const App = () => (
+  <RootGrid>
+    <ContentGrid>
+      <Switch>
+        <Route exact={true} path='/book/:step' component={SmartForm} />
+        <Route component={Header} />
+      </Switch>
+    </ContentGrid>
+  </RootGrid>
+)

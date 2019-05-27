@@ -5,9 +5,8 @@ import { ParameterizedContext } from 'koa'
 import { createElement, useContext } from 'react'
 import { renderToNodeStream, renderToStaticMarkup } from 'react-dom/server'
 
-import { sagaEnd } from '~/common/actions'
-import { asyncCache } from '~/common/components/smartForm/SmartForm'
-import rootSaga from '~/common/sagas'
+import { sagaEnd } from '~/common/shared/actions'
+import rootSaga from '~/common/shared/sagas'
 import configureStore from '~/common/store/configureStore'
 import ServerApp from '../ServerApp'
 import { HTTP_OK } from '../constants'
@@ -33,9 +32,6 @@ export default ({ clientBundleName }: IRendererProps) => async (ctx: Parameteriz
   store.dispatch(push({ pathname: url }))
 
   renderToStaticMarkup(getPageElement())
-  console.log('start', asyncCache)
-  let result = await Promise.all(asyncCache)
-  console.log('end', result)
   store.dispatch(sagaEnd())
 
   await sagaTask.toPromise()

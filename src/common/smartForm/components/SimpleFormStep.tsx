@@ -2,22 +2,22 @@ import { Button, Heading } from '@rebass/emotion'
 import { Box, Flex } from '@rebass/grid/emotion'
 import { FC } from 'react'
 
-import { ISmartFormAction, Steps } from './config'
+import { ISmartFormAction, Steps } from '../config'
 
 export interface ISimpleFormStepProps {
   config: {
     actions: Array<{
-      key: string,
+      key: string
       value: string,
-    }>,
+    }>
     title: string,
-  },
-  type: Steps,
+  }
+  type: Steps
   onNext(): void
   onSelect(a: ISmartFormAction): void
 }
 
-export let SimpleFormStep: FC<ISimpleFormStepProps> = ({ config, type, onNext, onSelect }) =>
+export let SimpleFormStep: FC<ISimpleFormStepProps> = ({ config, type, onNext, onSelect }) => (
   <Box>
     <Heading>{config.title}</Heading>
     <Flex>
@@ -33,3 +33,4 @@ export let SimpleFormStep: FC<ISimpleFormStepProps> = ({ config, type, onNext, o
       ))}
     </Flex>
   </Box>
+)

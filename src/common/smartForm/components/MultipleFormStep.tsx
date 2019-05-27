@@ -2,8 +2,8 @@ import { Button, Heading } from '@rebass/emotion'
 import { Box, Flex } from '@rebass/grid/emotion'
 import { useCallback, FC } from 'react'
 
-import { ISmartFormAction, Steps } from './config'
-import { useMultipleStepsReducer } from './useMultipleStepsReducer'
+import { ISmartFormAction, Steps } from '../config'
+import { useMultipleStepsReducer } from '../hooks/useMultipleStepsReducer'
 
 // TODO: Move to reducer
 interface IActionType {

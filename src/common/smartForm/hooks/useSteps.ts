@@ -1,7 +1,7 @@
 import { useReducer } from 'react'
 import useRouter from 'use-react-router'
 
-import { Steps } from './config'
+import { Steps } from '../config'
 
 export interface ISmartFormAction {
   key: string

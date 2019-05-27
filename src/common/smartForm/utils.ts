@@ -20,15 +20,16 @@ import {
   List,
   Morphism,
   Predicate,
-  Variadic,
 } from 'ramda'
 
+/* toggleStringContainsInList */
 export let equalStrings = equals as Morphism<string, Morphism<boolean, boolean>>
 export let rejectString = reject as (fn: Predicate<boolean>) => Morphism<List<string>, string[]>
 export let rejectByStringsEqual = o(rejectString, equalStrings)
 // TODO: converge does not work with ifElse. I don't know how to compose it =(
 export let toggleStringContainsInList = (key: string) => ifElse(contains(key), rejectByStringsEqual(key), append(key))
 
+/* getMinMaxValuesFromStateOfActions */
 export let reduceMin = reduce(min, Infinity)
 export let reduceMax = reduce(max, -Infinity)
 type GetMinMaxPair = (xs: number[]) => [number, number]

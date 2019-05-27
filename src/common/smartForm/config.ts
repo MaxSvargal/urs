@@ -8,11 +8,11 @@ export const enum Steps {
 
 // export type SingleSteps = Steps.CITY | Steps.TYPE | Steps.MOVEIN
 
-// export interface ISmartFormAction {
-//   key: string
-//   type: Steps | 'clear'
-//   value?: string
-// }
+export interface ISmartFormAction {
+  key: string
+  type: Steps | 'clear'
+  value?: string
+}
 
 export interface ISmartFormStep {
   actions: ISmartFormStepSimpleAction | ISmartFormStepFromToAction

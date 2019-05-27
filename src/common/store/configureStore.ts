@@ -7,7 +7,7 @@ import createSagaMiddleware, { Saga } from 'redux-saga'
 
 import { install } from 'redux-loop'
 
-import makeReducer from '../reducers'
+import makeReducer from '../shared/reducers'
 
 import { RootStore } from '../types'
 
@@ -17,23 +17,16 @@ const log = debug('server::redux-saga')
 export let cachedStore: RootStore
 
 export default (initialState: object, url = '/') => {
-  const history = BROWSER
-    ? createBrowserHistory()
-    : createMemoryHistory({ initialEntries: [ url ] })
+  const history = BROWSER ? createBrowserHistory() : createMemoryHistory({ initialEntries: [url] })
 
   const sagaMiddleware = createSagaMiddleware({ onError: log })
-  const middlewares = [ routerMiddleware(history), sagaMiddleware ]
+  const middlewares = [routerMiddleware(history), sagaMiddleware]
   const enhancers = applyMiddleware(...middlewares)
   const rootReducer = makeReducer(history)
 
-  const store = createStore(
-    rootReducer,
-    initialState,
-    composeWithDevTools(enhancers, install()),
-  ) as RootStore
+  const store = createStore(rootReducer, initialState, composeWithDevTools(enhancers, install())) as RootStore
 
-  let runSaga = (saga: Saga) =>
-    sagaMiddleware.run(saga)
+  let runSaga = (saga: Saga) => sagaMiddleware.run(saga)
 
   // if (module.hot) {
   //   module.hot.accept('./', () => {

@@ -1,9 +1,9 @@
 import { useReducer } from 'react'
 
 import { contains } from 'ramda'
-import { IAction, IConfig } from './MultipleFormStep'
-import { ISmartFormAction, Steps } from './config'
-import { getMinMaxValuesFromStateOfActions, toggleStringContainsInList } from './utils'
+import { IAction, IConfig } from '../components/MultipleFormStep'
+import { ISmartFormAction, Steps } from '../config'
+import { getMinMaxValuesFromStateOfActions, toggleStringContainsInList } from '../utils'
 
 type IStateSelected = string[]
 
