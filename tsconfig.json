@@ -2,8 +2,12 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "~/*": [ "*" ],
-      "components/*": [ "common/components/*" ]
+      "~/*": [
+        "*"
+      ],
+      "components/*": [
+        "common/components/*"
+      ]
     },
     "module": "commonjs",
     "target": "esnext",
@@ -12,6 +16,7 @@
     "inlineSources": true,
     "jsx": "react",
     "importHelpers": true,
+    "incremental": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
