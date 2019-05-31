@@ -12,17 +12,17 @@ import ServerApp from '../ServerApp'
 import { HTTP_OK } from '../constants'
 
 interface IRendererProps {
-  clientBundleName: string
+  bundlesFilesNames: string[]
 }
 
-export default ({ clientBundleName }: IRendererProps) => async (ctx: ParameterizedContext) => {
+export default ({ bundlesFilesNames }: IRendererProps) => async (ctx: ParameterizedContext) => {
   let url = ctx.req.url || ''
   let context = {}
   let { store, runSaga } = configureStore({}, url)
 
   let getPageElement = () =>
     createElement(ServerApp, {
-      bundle: clientBundleName,
+      bundles: bundlesFilesNames,
       context,
       store,
       url,

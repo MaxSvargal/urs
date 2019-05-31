@@ -1,7 +1,7 @@
-import { useReducer } from 'react'
+import { useCallback, useReducer } from 'react'
 
 import { contains } from 'ramda'
-import { IAction, IConfig } from '../components/MultipleFormStep'
+import { IAction, IConfig } from 'components/MultipleFormStep'
 import { ISmartFormAction, Steps } from '../config'
 import { getMinMaxValuesFromStateOfActions, toggleStringContainsInList } from '../utils'
 
@@ -20,9 +20,10 @@ let getResult = (type: Steps, config: IConfig, state: IStateSelected): ISmartFor
 
 export let useMultipleStepsReducer = () => {
   let [selected, dispatch] = useReducer(reducer, [])
-  let toggle = (a: IAction) => () => {
-    dispatch(a)
-  }
+  let toggle = (a: IAction) =>
+    useCallback(() => {
+      dispatch(a)
+    }, [a])
   let isActive = (a: IAction) => contains(a.key, selected)
 
   return [selected, toggle, isActive, getResult] as const

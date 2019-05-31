@@ -3,11 +3,11 @@ import { default as serialize } from 'serialize-javascript'
 
 export interface IServerPageProps {
   body: JSX.Element
-  bundle: string
+  bundles: string[]
   state: object
 }
 
-export default ({ bundle, body, state }: IServerPageProps) => (
+export default ({ bundles, body, state }: IServerPageProps) => (
   <html lang='en'>
     <head>
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
@@ -19,7 +19,9 @@ export default ({ bundle, body, state }: IServerPageProps) => (
     <body>
       <div id='root'>{ body }</div>
       {<script dangerouslySetInnerHTML={{__html: `window.__initialState=${serialize(state || {})};`}} charSet='UTF-8'/>}
-      <script src={ `/${bundle}` } />
+      {bundles.map(bundle => (
+        <script key={bundle} src={ `/${bundle}`} />
+      ))}
     </body>
   </html>
 )

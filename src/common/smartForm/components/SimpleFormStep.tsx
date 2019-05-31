@@ -1,6 +1,6 @@
 import { Button, Heading } from '@rebass/emotion'
 import { Box, Flex } from '@rebass/grid/emotion'
-import { FC } from 'react'
+import { useCallback, FC } from 'react'
 
 import { ISmartFormAction, Steps } from '../config'
 
@@ -23,10 +23,10 @@ export let SimpleFormStep: FC<ISimpleFormStepProps> = ({ config, type, onNext, o
     <Flex>
       {config.actions.map(action => (
         <Button
-          onClick={() => {
+          onClick={useCallback(() => {
             onSelect({ ...action, type })
             onNext()
-          }}
+          }, [])}
           key={action.key}>
           {action.value}
         </Button>

@@ -5,8 +5,6 @@ import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import createSagaMiddleware, { Saga } from 'redux-saga'
 
-import { install } from 'redux-loop'
-
 import makeReducer from '../shared/reducers'
 
 import { RootStore } from '../types'
@@ -24,15 +22,15 @@ export default (initialState: object, url = '/') => {
   const enhancers = applyMiddleware(...middlewares)
   const rootReducer = makeReducer(history)
 
-  const store = createStore(rootReducer, initialState, composeWithDevTools(enhancers, install())) as RootStore
+  const store = createStore(rootReducer, initialState, composeWithDevTools(enhancers)) as RootStore
 
   let runSaga = (saga: Saga) => sagaMiddleware.run(saga)
 
-  // if (module.hot) {
-  //   module.hot.accept('./', () => {
-  //     store.replaceReducer(createReducer(store))
-  //   })
-  // }
+  if (module.hot) {
+    module.hot.accept('./', () => {
+      store.replaceReducer(createReducer(store))
+    })
+  }
   cachedStore = store
 
   return { store, runSaga, history }

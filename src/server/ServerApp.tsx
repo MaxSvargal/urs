@@ -8,15 +8,15 @@ import ServerPage from './ServerPage'
 import { RootStore } from '../common/types'
 
 interface IServerAppProps {
-  bundle: string
+  bundles: string[]
   context: object
   store: RootStore
   url: string
 }
 
-export default ({ bundle, url, store, context }: IServerAppProps) =>
+export default ({ bundles, url, store, context }: IServerAppProps) =>
   <ServerPage
-    bundle={bundle}
+    bundles={bundles}
     state={store.getState()}
     body={
       <Provider store={store}>
